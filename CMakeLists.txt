@@ -34,12 +34,18 @@ include_directories(${PROJECT_BINARY_DIR}/parc ${PROJECT_SOURCE_DIR})
 
 find_package( Doxygen )
 
+if(UNIX AND NOT APPLE)
+  set(RT_LIBRARY rt)
+endif()
+
+
 set(PARC_BIN_LIBRARIES
   parc
   ${LONGBOW_LIBRARIES}
   ${LIBEVENT_LIBRARIES}
   ${OPENSSL_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
+  ${RT_LIBRARY}
   )
 
 macro(AddTest testFile)
